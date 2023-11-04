@@ -14,7 +14,10 @@ Main Goals we are aiming for:
 
 ## Getting Started
 
-We plan on designing a website with a nautical theme and a focus on reducing medical errors and accidents in a healthcare setting
+We plan on designing a website with a nautical theme and a focus on reducing medical errors and accidents in a healthcare setting.
+- Healthcare Staff Safety Checklist
+- Healthcare Staff Fatigue Monitoring
+- Patient Identification 
 
 ## Links
 
