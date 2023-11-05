@@ -19,6 +19,7 @@ We plan on designing a website with a nautical theme and a focus on reducing med
 - Healthcare Staff Fatigue Monitoring
 - Patient Identification 
 - Inventory Managment Systems
+- Kid Game (Matching)
 
 ## Links
 
