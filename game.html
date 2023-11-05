@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Healthcare Worker Matching Game</title>
+    <style>
+        *{
+         margin: 0;
+         padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        box-sizing: border-box;
+        } 
+        .card {
+            display: inline-block;
+            width: 150px;
+            height: 100px;
+            margin: 10px;
+            background-color: skyblue;
+            text-align: center;
+            cursor: pointer;
+            border: 5px solid black;
+        }
+        .matched {
+            background-color: #aaffaa;
+            pointer-events: none;
+        }
+        #congrats {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+         .button {
+                 display: inline-block;
+                 padding: 10px 20px;
+                 font-size: 15px;
+                 cursor: pointer;
+                 text-align: center;
+                 text-decoration: none;
+                 outline: none;
+                 color: #fff;
+                  background-color: #4CAF50;
+                  border: none;
+                 border-radius: 15px;
+                 box-shadow: 0 9px #999; 
+                }       
+
+                .button:hover {background-color: #3e8e41}
+
+                .button:active {
+                 background-color: #3e8e41;
+                 box-shadow: 0 5px #666;
+                transform: translateY(4px);
+                }
+    </style>
+</head>
+<body>
+    <h1><center>Healthcare Worker Matching Game</center></h1>
+    <div id="game-container">
+        <div class="card" data-card="Doctor">Doctor</div>
+        <div class="card" data-card="Nurse">Nurse</div>
+        <div class="card" data-card="Dentist">Dentist</div>
+        <div class="card" data-card="Pharmacist">Pharmacist</div>
+        <div class="card" data-card="Surgeon">Surgeon</div>
+        <div class="card" data-card="Radiologist">Radiologist</div>
+    </div>
+    
+    <div id="definitions">
+        <div class="card" data-card="Pharmacist">Dispenses medications and provides medication information.</div>
+        <div class="card" data-card="Dentist">Specializes in oral health and dental care.</div>
+        <div class="card" data-card="Surgeon">Performs surgical procedures to treat medical conditions.</div>
+        <div class="card" data-card="Doctor">A medical professional who diagnoses and treats medical conditions.</div>
+        <div class="card" data-card="Radiologist">Interprets medical images (X-rays, MRIs, etc.).</div>
+        <div class="card" data-card="Nurse">Provides patient care and assists doctors in healthcare settings.</div>
+    </div>
+
+    <div id="congrats">
+        <p>Congratulations! You matched all pairs.</p>
+        <button class="button"onclick="restartGame()">Restart</button>
+    </div>
+</div>
+    <script>
+        let selectedCards = [];
+        let matchedPairs = 0;
+
+        const cards = document.querySelectorAll('.card');
+        const definitions = document.querySelectorAll('#definitions .card');
+
+        cards.forEach(card => {
+            card.addEventListener('click', () => flipCard(card));
+        });
+
+        definitions.forEach(definition => {
+            definition.addEventListener('click', () => flipCard(definition));
+        });
+
+        function flipCard(card) {
+            if (selectedCards.length < 2 && !card.classList.contains('matched')) {
+                card.classList.add('matched');
+                selectedCards.push(card);
+                if (selectedCards.length === 2) {
+                    setTimeout(checkForMatch, 500);
+                }
+            }
+        }
+
+        function checkForMatch() {
+            const [card1, card2] = selectedCards;
+            if (card1.dataset.card === card2.dataset.card) {
+                matchedPairs++;
+                if (matchedPairs === cards.length / 2) {
+                    displayCongratulations();
+                }
+            } else {
+                card1.classList.remove('matched');
+                card2.classList.remove('matched');
+            }
+            selectedCards = [];
+        }
+
+        function displayCongratulations() {
+            const congrats = document.getElementById('congrats');
+            congrats.style.display = 'block';
+        }
+
+        function restartGame() {
+          
+            matchedPairs = 0;
+            
+            const congrats = document.getElementById('congrats');
+            congrats.style.display = 'none';
+            
+       
+            cards.forEach(card => card.classList.remove('matched'));
+            definitions.forEach(definition => definition.classList.remove('matched'));
+        }
+    </script>
+</body>
+</html>
