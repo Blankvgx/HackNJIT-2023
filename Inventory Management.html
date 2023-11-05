@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        *{
+         margin: 0;
+         padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        box-sizing: border-box;
+        } 
+        .hero{
+                width: 100%;
+                height: 100vh;
+                color: black;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+         }
+        .container{
+                width: 450px;
+                padding: 25px 40px 25px 25px;
+                background: skyblue;
+                border: 10px solid black;
+                border-radius: 15px;
+                line-height: 1.5;
+                margin: 5%; 
+        }
+        .button {
+                 display: inline-block;
+                 padding: 10px 20px;
+                 font-size: 15px;
+                 cursor: pointer;
+                 text-align: center;
+                 text-decoration: none;
+                 outline: none;
+                 color: #fff;
+                  background-color: #4CAF50;
+                  border: none;
+                 border-radius: 15px;
+                 box-shadow: 0 9px #999; 
+                }       
+
+                .button:hover {background-color: #3e8e41}
+
+                .button:active {
+                 background-color: #3e8e41;
+                 box-shadow: 0 5px #666;
+                transform: translateY(4px);
+                }
+                .new{
+                    margin-right: 10px;
+                }
+                
+    </style>
+  </head>
+  <body>
+    <div class = "hero">
+        <div class="container">
+      <h1><center>Inventory Management System</center></h1>
+      <form id="inventoryForm">
+          <label for="item">Item Name:</label>
+          <input type="text" id="item" name="item" required><br><br>
+          
+          <label for="currentQuantity">Current Quantity:</label>
+          <input type="number" id="currentQuantity" name="currentQuantity" min="0" required><br><br>
+          
+          <label for="plannedQuantity">Planned Quantity:</label>
+          <input type="number" id="plannedQuantity" name="plannedQuantity" min="0" required><br><br>
+          
+          <input type="hidden" id="editIndex" name="editIndex" value="-1">
+          <input class = "button" type="submit" value="Submit">
+      </form>
+    </div>
+        <div class="container">
+            
+      <h2><center>Current Inventory </center></h2>
+      <table>
+          <tr>
+              <th>Item Name</th>
+              <th>Current Quantity</th>
+              <th>Planned Quantity</th>
+              <th>Action</th>
+          </tr>
+      </table>
+    </div>
+</div>
+      <script>
+          document.getElementById("inventoryForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+    
+    const item = document.getElementById("item").value;
+    const currentQuantity = document.getElementById("currentQuantity").value;
+    const plannedQuantity = document.getElementById("plannedQuantity").value;
+    const editIndex = document.getElementById("editIndex").value;
+    
+    if (editIndex === "-1") {
+        const table = document.querySelector("table");
+        const row = table.insertRow(table.rows.length);
+        const cell1 = row.insertCell(0);
+        const cell2 = row.insertCell(1);
+        const cell3 = row.insertCell(2);
+        const cell4 = row.insertCell(3);
+        cell1.innerHTML = item;
+        cell2.innerHTML = currentQuantity;
+        cell3.innerHTML = plannedQuantity;
+        cell4.innerHTML = '<button class="button" onclick="editRow(this)">Edit</button>';
+    } else {
+        const table = document.querySelector("table");
+        const row = table.rows[editIndex];
+        row.cells[0].innerHTML = item;
+        row.cells[1].innerHTML = currentQuantity;
+        row.cells[2].innerHTML = plannedQuantity;
+        row.cells[3].innerHTML = '<button class="button" onclick="editRow(this)">Edit</button>';
+        document.getElementById("editIndex").value = "-1";
+    }
+
+    document.getElementById("item").value = "";
+    document.getElementById("currentQuantity").value = "";
+    document.getElementById("plannedQuantity").value = "";
+});
+function editRow(button) {
+    const table = document.querySelector("table");
+    const row = button.parentNode.parentNode;
+    const cells = row.cells;
+
+    document.getElementById("item").value = cells[0].innerHTML;
+    document.getElementById("currentQuantity").value = cells[1].innerHTML;
+    document.getElementById("plannedQuantity").value = cells[2].innerHTML;
+    document.getElementById("editIndex").value = row.rowIndex;
+
+    document.querySelector("input[type='submit']").value = "Save";
+}
+ </script>
+  </body>
+  </html>
