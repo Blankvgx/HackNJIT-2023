@@ -1,5 +1,5 @@
 # Hack NJIT 2023
-# we live, we laugh, we smurf cat
+
 ## Table of Contents
 
 - [About](#about)
