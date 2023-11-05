@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Work Hour Advisor</title>
+</head>
+<style>
+      *{
+         margin: 0;
+         padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        box-sizing: border-box;
+        } 
+        .hero{
+                width: 100%;
+                height: 100vh;
+                color: black;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+         }
+        .container{
+                width: 450px;
+                padding: 25px 40px 25px 25px;
+                background: skyblue;
+                border: 10px solid black;
+                border-radius: 15px;
+                line-height: 1.5;
+        }
+        .button {
+                 display: inline-block;
+                 padding: 10px 20px;
+                 font-size: 15px;
+                 cursor: pointer;
+                 text-align: center;
+                 text-decoration: none;
+                 outline: none;
+                 color: #fff;
+                  background-color: #4CAF50;
+                  border: none;
+                 border-radius: 15px;
+                 box-shadow: 0 9px #999; 
+                }       
+
+                .button:hover {background-color: #3e8e41}
+
+                .button:active {
+                 background-color: #3e8e41;
+                 box-shadow: 0 5px #666;
+                transform: translateY(4px);
+                }
+                .new{
+                    margin-top: 10px;
+                }
+              
+</style>
+<body>
+    <div class = "hero">
+    <div class="container">
+    <h1><center>Work Hour Advisor</center></h1>
+    
+    <form id="workHourForm">
+        <label for="hoursWorked">Number of Hours Worked:</label>
+        <input type="number" id="hoursWorked" name="hoursWorked" required>
+        <br><br>
+        <label for="lastBreak">Last Break (Hours):</label>
+        <input type="number" id="lastBreak" name="lastBreak" required>
+        <br><br>
+        <input class="button" type="submit" value="Check Work Hours">
+    </form>
+    <div class = 'new'>
+    <p id="advice"></p>
+    </div>
+    </div>
+    </div>
+    <script>
+        document.getElementById('workHourForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Get input values
+            const hoursWorked = parseFloat(document.getElementById('hoursWorked').value);
+            const lastBreak = parseFloat(document.getElementById('lastBreak').value);
+
+            // Check work hours and last break
+            if (hoursWorked > 40 || lastBreak > 5) {
+                document.getElementById('advice').textContent = 'You should take a break and rest.';
+            } else {
+                document.getElementById('advice').textContent = 'You can continue working, but dont forget to take regular breaks.';
+            }
+        });
+    </script>
+</body>
+</html>
