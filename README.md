@@ -18,6 +18,7 @@ We plan on designing a website with a nautical theme and a focus on reducing med
 - Healthcare Staff Safety Checklist
 - Healthcare Staff Fatigue Monitoring
 - Patient Identification 
+- Inventory Managment Systems
 
 ## Links
 
